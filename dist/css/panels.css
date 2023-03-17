@@ -1,0 +1,204 @@
+
+/** USER PANEL **/
+
+/* TOOLBAR */
+.username, .bi-bell, .bi-printer {
+	color: #424242;
+	font-size: 14px;
+	font-family: "vazirl";
+}
+.notifs {
+	left: 10px;
+	direction: rtl;
+	max-height: 200px;
+	position: absolute;
+	width: fit-content;
+	visibility: hidden;
+	overflow-y: scroll;
+	top: 40px;bottom: 0;
+	height: fit-content;
+	box-shadow: 0 0 50px #727272;
+	border: 1px solid #e0e0e0;
+}
+.notifs.visibleNotifs {
+	visibility: visible;
+}
+.notif {
+	padding: 8px;
+	border-bottom: 0.8px solid #e0e0e0;
+}
+.notif-time {
+	color: gray;
+	font-size: 9px;
+	float: left;
+	direction: ltr;
+}
+
+/* SESSION */
+.session {
+	padding: 10px;
+	background: #F5F5F5;
+	border-radius: 12px;
+	margin: 10px auto 0 auto;
+	box-shadow: 0 0 8px #e0e0e0;
+}
+.session-name {
+	color: #fff;
+	padding: 6px;
+	margin: auto;
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 5px;
+	width: fit-content;
+	transform: rotate(2deg);
+	border-radius: 20% 25% 20% 24%;
+	background-image: linear-gradient(-100deg, #2196F3, #0D47A1 95%);
+}
+
+/* TEACHERS */
+.teaching-lesson {
+	color: #424242;
+	font-weight: bold;
+}
+.teacher-name {
+	margin-right: 6px;
+}
+.teacher-item {
+	display: flex;
+	direction: rtl;
+}
+
+/* PERSONAL INFO */
+.field {
+	display: flex;
+	direction: rtl;
+	margin-top: 4px;
+}
+.field-name {
+	font-size: 12px;
+	color: #424242;
+	margin: auto 0 auto 0;
+	font-family: "vazirl";
+	margin-left: 5px;
+}
+.field-value {
+	background: #e0e0e0;
+	border-radius: 50px;
+	padding: 4px;
+}
+
+/* LIBRARY */
+.book-photo {
+	width: 100%;
+	height: auto;
+}
+.table {
+	direction: rtl;
+}
+
+/* width */
+::-webkit-scrollbar {
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: transparent;
+}
+
+/** ADMIN PANEL **/
+
+/* ADD NOTIF */
+select {
+	width: 100%;
+	margin: 8px;
+	border: none;
+	padding: 8px;
+	outline: none;
+	direction: rtl;
+	text-align: right;
+	border-radius: 50px;
+	margin: auto!important;
+}
+#notif_text {
+	direction: rtl;
+}
+.table-header {
+	font-size: 14px;
+	font-weight: bold;
+}
+.operations {
+	display: flex;
+}
+.btn-info, .form-check-input {
+	margin: 1px;
+}
+.form-check-input {
+	width: 42px;
+	height: auto;
+}
+
+/* GET/SET STUDENT */
+.nc-input {
+	display: flex;
+	direction: rtl;
+}
+
+
+/** DEVELOPER PANEL **/
+
+/* THEMES */
+.themes {
+	text-align: right;
+}
+.theme {
+	display: flex;
+}
+.theme-input {
+	margin-left: auto;
+}
+.theme-real-input {
+	background: transparent;
+	border-color: transparent;
+	outline: none;
+}
+
+/* DATA BASES */
+.db {
+	display: flex;
+	margin-top: 3px;
+}
+.db-actions {
+	margin-left: auto;
+}
+
+/* LOGCAT */
+.search-bar {
+	margin: 8px;
+	padding: 8px;
+	display: flex;
+	color: #727272;
+	background: #F5F5F5;
+	border-radius: 50px;
+	box-shadow: 0 0 8px #e0e0e0;
+}
+.search-input {
+	width: 100%;
+	border: none;
+	outline: none;
+	margin-right: 3px;
+	font-family: "vazirl";
+	background: transparent;
+}
+.logs {
+	direction: ltr!important;
+}
+
+/* USERS */
+.users {
+	text-align: right;
+}

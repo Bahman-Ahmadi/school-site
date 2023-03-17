@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fa">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width"/>
+		<link href="dist/libs/bootstrap5.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="dist/libs/bootstrap-icons.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="dist/css/index.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="dist/css/panels.css" type="text/css" media="all" />
+		<script src="dist/libs/jquery-3.6.1.min.js" charset="utf-8"></script>
+
+		<title>دبیرستان فرهنگیان ثارالله دهقان سفیدسنگی</title>
+	</head>
+	<body ng-app="myApp">
+		<nav class="navbar toolbar" ng-controller="StorageController">
+			<button class="btn btn-light notifpanel"><i class="bi bi-bell"></i></button>
+			<button class="btn btn-light print"><i class="bi bi-printer"></i></button>
+			<span class="site-title">دبیرستان فرهنگیان ثارالله حاج دهقان سفیدسنگی</span>
+			<span class="username">{{account.fname + " " + account.lname}} <i class="bi bi-person"></i></span>
+		</nav>
+
+		<br>
+
+		<div class="container">
+			<div class="row">
+				<div class="session info row" ng-controller="StudentController">
+					<div class="session-name col-12">اطلاعات شخصی</div>
+					<div class="field col-12"><div class="field-name">نام و نام‌خانوادگی</div><div class="field-value">{{student.fname + " " + student.lname}}</div></div>
+					<div class="field col-12"><div class="field-name">نام پدر</div><div class="field-value">{{student.father}}</div></div>
+					<div class="field col-4"><div class="field-name">رشته</div><div class="field-value">{{student.classtype}}</div></div>
+					<div class="field col-4"><div class="field-name">پایه</div><div class="field-value">{{student.classnum}}</div></div>
+					<div class="field col-4"><div class="field-name">کلاس</div><div class="field-value">{{student.class}}</div></div>
+					<div class="field col-12"><div class="field-name">کدملی</div><div class="field-value">{{student.code}}</div></div>
+				</div>
+				<div class="session teachers col-md-5" ng-controller="ClassroomController">
+					<div class="session-name">لیست دبیران شما</div>
+					<div class="teacher-item" ng-repeat="i in classroom.teachers"><div class="teaching-lesson"><i class="bi bi-book-fill"></i> {{i[0]}} :</div><div class="teacher-name">{{i[1]}}</div></div>
+				</div>
+				<div class="session program col-md-5">
+					<div class="session-name">برنامهٔ هفتگی</div>
+					<table class="table table-bordered table-striped" ng-controller="ClassroomController">
+						<tr>
+							<td>روز</td>
+							<td>زنگ اول</td>
+							<td>زنگ دوم</td>
+							<td>زنگ سوم</td>
+							<td>زنگ چهارم</td>
+						</tr>
+						<tr>
+							<td>شنبه</td>
+							<td>{{classroom.program['شنبه'][0]}}</td>
+							<td>{{classroom.program['شنبه'][1]}}</td>
+							<td>{{classroom.program['شنبه'][2]}}</td>
+							<td>{{classroom.program['شنبه'][3]}}</td>
+						</tr>
+						<tr>
+							<td>یکشنبه</td>
+							<td>{{classroom.program['یکشنبه'][0]}}</td>
+							<td>{{classroom.program['یکشنبه'][1]}}</td>
+							<td>{{classroom.program['یکشنبه'][2]}}</td>
+							<td>{{classroom.program['یکشنبه'][3]}}</td>
+						</tr>
+						<tr>
+							<td>دوشنبه</td>
+							<td>{{classroom.program['دوشنبه'][0]}}</td>
+							<td>{{classroom.program['دوشنبه'][1]}}</td>
+							<td>{{classroom.program['دوشنبه'][2]}}</td>
+							<td>{{classroom.program['دوشنبه'][3]}}</td>
+						</tr>
+						<tr>
+							<td>سه‌شنبه</td>
+							<td>{{classroom.program['سه‌شنبه'][0]}}</td>
+							<td>{{classroom.program['سه‌شنبه'][1]}}</td>
+							<td>{{classroom.program['سه‌شنبه'][2]}}</td>
+							<td>{{classroom.program['سه‌شنبه'][3]}}</td>
+						</tr>
+						<tr>
+							<td>چهارشنبه</td>
+							<td>{{classroom.program['چهارشنبه'][0]}}</td>
+							<td>{{classroom.program['چهارشنبه'][1]}}</td>
+							<td>{{classroom.program['چهارشنبه'][2]}}</td>
+							<td>{{classroom.program['چهارشنبه'][3]}}</td>
+						</tr>
+						<tr>
+							<td>پنجشنبه</td>
+							<td>{{classroom.program['پنج‌شنبه'][0]}}</td>
+							<td>{{classroom.program['پنج‌شنبه'][1]}}</td>
+							<td>{{classroom.program['پنج‌شنبه'][2]}}</td>
+							<td>{{classroom.program['پنج‌شنبه'][3]}}</td>
+						</tr>
+					</table>
+				</div>
+				<div class="session credit">
+					<div class="session-name">کارنامه</div>
+					<table class="table table-bordered table-striped" ng-controller="StudentController">
+						<tr>
+							<td>درس</td>
+							<td>مستمر نوبت‌اول</td>
+							<td>نوبت‌اول</td>
+							<td>مستمر نوبت دوم</td>
+							<td>نوبت دوم</td>
+						</tr>
+						<tr ng-repeat="lesson in student.credit">
+							<td>{{lesson[0]}}</td>
+							<td>{{lesson[1]}}</td>
+							<td>{{lesson[2]}}</td>
+							<td>{{lesson[3]}}</td>
+							<td>{{lesson[4]}}</td>
+						</tr>
+					</table>
+				</div>
+				<div class="session library">
+					<div class="session-name">کتابخانه</div>
+					<table class="table table-bordered table-striped" ng-controller="StudentBooksController">
+						<tr>
+							<td>ردیف</td>
+							<td>تصویر</td>
+							<td>نام</td>
+							<td>انتشارات</td>
+							<td>تاریخ</td>
+						</tr>
+						<tr ng-repeat="result in results">
+							<td>{{results.indexOf(result)+1}}</td>
+							<td><img src="{{result.photo}}" alt="BOOK" class="book-photo"></td>
+							<td>{{result[0].name}}</td>
+							<td>{{result[0].publication}}</td>
+							<td>{{result[1]}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="session notifs" ng-controller="StudentController">
+				<div class="notif" ng-repeat="ntf in student.notifications"><span class="notif-time">{{ntf.time}}</span><br><i class="bi bi-bell"></i> {{ntf.text}}</div>
+			</div>
+		</div>
+		
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+			
+		<nav class="navbar fixed-bottom menubar">
+			<div class="item selected">
+				<i class="bi bi-person menu-ic"></i> <br>
+				پروفایل
+			</div>
+			<div class="item">
+				<i class="bi bi-book menu-ic"></i> <br>
+				کتابخانه
+			</div>
+			<div class="item">
+				<i class="bi bi-coin menu-ic"></i> <br>
+				پرداخت
+			</div>
+			<div class="item">
+				<i class="bi bi-house menu-ic"></i> <br>
+				خانه
+			</div>
+		</nav>
+		
+		<script src="dist/libs/angular.js" charset="utf-8"></script>
+		<script src="dist/js/api.js" type="text/javascript" charset="utf-8"></script>
+		<script src="dist/js/app.js" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			document.body.onload = (e) => {localStorage.account == null ? goto("register.html") : null}
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,22 @@
+[
+	{
+		"number": 202,
+		"type": "riazi",
+		"students": ["0920000000", "..."],
+		"teachers": [
+			["ریاضی", "سراج"],
+			["فیزیک", "رستم‌نژاد"],
+			["هندسه", "امینی"],
+			["شیمی", "ایمان‌پور"],
+			["فارسی", "شادمان"]
+		],
+		"program": {
+			"شنبه": ["lesson","lesson","lesson","lesson"],
+			"یکشنبه": ["lesson","lesson","lesson","lesson"],
+			"دوشنبه": ["lesson","lesson","lesson","lesson"],
+			"سه‌شنبه": ["lesson","lesson","lesson","lesson"],
+			"چهارشنبه": ["lesson","lesson","lesson","lesson"],
+			"پنج‌شنبه": ["lesson","lesson","lesson"]
+		}
+	}
+]

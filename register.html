@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fa">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width"/>
+		<link href="dist/libs/bootstrap5.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="dist/libs/bootstrap-icons.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="dist/css/index.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="dist/css/register.css" type="text/css" media="all" />
+		<script src="dist/libs/jquery-3.6.1.min.js" charset="utf-8"></script>
+
+		<title>دبیرستان فرهنگیان ثارالله دهقان سفیدسنگی</title>
+	</head>
+	<body ng-app="myApp">
+		<nav class="navbar toolbar">
+			<span class="site-title">دبیرستان فرهنگیان ثارالله حاج دهقان سفیدسنگی</span>
+		</nav>
+
+		<form ng-controller="RegisterController" class="register" accept-charset="utf-8">
+			<div class="person"><i class="bi bi-person"></i></div>
+
+			<input type="text" id="codemelli" ng-model="code" placeholder="کد ملی خود را وارد کنید..." />
+			<button class="btn btn-primary" ng-click="checkCode(code);" ng-disabled="code.length != 10" type="submit">بررسی</button><br>
+		
+			<span class="error" ng-show="0 < code.length < 10">مقدار ورودی نامعتبر است</span>
+		</form>
+
+		
+		<script src="dist/libs/Angular.js" charset="utf-8"></script>
+		<script src="dist/js/api.js" type="text/javascript" charset="utf-8"></script>
+		<script src="dist/js/app.js" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			document.body.onload = (e) => {
+				localStorage.account != null ? goto(localStorage.account.type == "student" ? goto("userpanel.html") : localStorage.account.type == "developer" ? goto("developerpanel.html") : goto("adminpanel.html")) : null;
+			}
+		</script>
+	</body>
+</html>

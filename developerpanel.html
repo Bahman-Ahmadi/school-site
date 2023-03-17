@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fa">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width"/>
+		<link href="dist/libs/bootstrap5.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="dist/libs/bootstrap-icons.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="dist/css/index.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="dist/css/panels.css" type="text/css" media="all" />
+		<script src="dist/libs/jquery-3.6.1.min.js" charset="utf-8"></script>
+
+		<title>دبیرستان فرهنگیان ثارالله دهقان سفیدسنگی</title>
+	</head>
+	<body ng-app="myApp">
+		<nav class="navbar toolbar" ng-controller="StorageController">
+			<button class="btn btn-light print"><i class="bi bi-printer"></i></button>
+			<span class="site-title">دبیرستان فرهنگیان ثارالله حاج دهقان سفیدسنگی</span>
+			<span class="username">{{account.fname + " " + account.lname}} <i class="bi bi-person"></i></span>
+		</nav>
+
+		<br>
+
+		<div class="container">
+			<div class="row">
+				<div class="session themes" ng-controller="ThemeController">
+					<div class="session-name">Edit Theme</div>
+					<div class="theme" ng-repeat="i in template">
+						<div class="theme-name">{{i[0]}}</div>
+						<div class="theme-input"><input type="color" class="theme-real-input" id="{{i[0]}}" value="{{i[1]}}" /></div>
+					</div>
+					<button class="btn btn-warning" ng-click="editTheme(names);">Apply Changes <i class="bi bi-pencil"></i></button>
+				</div>
+				<div class="session dbs">
+					<div class="session-name">Data Bases</div>
+					<div class="db">
+						<div class="db-name">Users</div>
+						<div class="db-actions">
+							<button class="btn btn-outline-success" onclick="goto('dist/dbs/users.json', true);"><i class="bi bi-arrow-down-circle"></i> Backup</button>
+							<button class="btn btn-outline-danger"><i class="bi bi-arrow-up-circle"></i> Restore</button>
+						</div>
+					</div>
+					<div class="db">
+						<div class="db-name">Students</div>
+						<div class="db-actions">
+							<button class="btn btn-outline-success" onclick="goto('dist/dbs/students.json', true);"><i class="bi bi-arrow-down-circle"></i> Backup</button>
+							<button class="btn btn-outline-danger"><i class="bi bi-arrow-up-circle"></i> Restore</button>
+						</div>
+					</div>
+					<div class="db">
+						<div class="db-name">Teachers</div>
+						<div class="db-actions">
+							<button class="btn btn-outline-success" onclick="goto('dist/dbs/teachers.json', true);"><i class="bi bi-arrow-down-circle"></i> Backup</button>
+							<button class="btn btn-outline-danger"><i class="bi bi-arrow-up-circle"></i> Restore</button>
+						</div>
+					</div>
+					<div class="db">
+						<div class="db-name">Classrooms</div>
+						<div class="db-actions">
+							<button class="btn btn-outline-success" onclick="goto('dist/dbs/classrooms.json', true);"><i class="bi bi-arrow-down-circle"></i> Backup</button>
+							<button class="btn btn-outline-danger"><i class="bi bi-arrow-up-circle"></i> Restore</button>
+						</div>
+					</div>
+					<div class="db">
+						<div class="db-name">Books</div>
+						<div class="db-actions">
+							<button class="btn btn-outline-success" onclick="goto('dist/dbs/books.json', true);"><i class="bi bi-arrow-down-circle"></i> Backup</button>
+							<button class="btn btn-outline-danger"><i class="bi bi-arrow-up-circle"></i> Restore</button>
+						</div>
+					</div>
+					<div class="db">
+						<div class="db-name">Messages</div>
+						<div class="db-actions">
+							<button class="btn btn-outline-success" onclick="goto('dist/dbs/messages.json', true);"><i class="bi bi-arrow-down-circle"></i> Backup</button>
+							<button class="btn btn-outline-danger"><i class="bi bi-arrow-up-circle"></i> Restore</button>
+						</div>
+					</div>
+					<div class="db">
+						<div class="db-name"><i class="bi bi-file-text"></i> LogCat</div>
+						<div class="db-actions">
+							<button class="btn btn-outline-success" onclick="goto('dist/dbs/logs.json', true);"><i class="bi bi-arrow-down-circle"></i> Backup</button>
+							<button class="btn btn-outline-danger"><i class="bi bi-arrow-up-circle"></i> Restore</button>
+						</div>
+					</div>
+				</div>
+				<div class="session users">
+					<div class="session-name">Users</div>
+					<div class="search-bar">
+						<i class="bi bi-search"></i> <input class="search-input" ng-model="filter" placeholder="search here..." />
+					</div>
+					<table class="table table-bordered table-striped" ng-controller="UsersController">
+						<tr>
+							<td>Name</td>
+							<td>Code</td>
+							<td>Access Level</td>
+							<td>Actions</td>
+						</tr>
+						<tr ng-repeat="user in users | filter: filter">
+							<td>{{user.fname + ' ' + user.lname}}</td>
+							<td>{{user.code}}</td>
+							<td>{{user.type}}</td>
+							<td><button class="btn btn-danger" ng-click="deleteUser(user.code);"><i class="bi bi-trash"></i></button></td>
+						</tr>
+					</table>
+					<button class="btn btn-success"><i class="bi bi-plus-circle"></i> Add User</button>
+				</div>
+				<div class="session logcat">
+					<div class="session-name">LogCat</div>
+					<div class="search-bar">
+						<i class="bi bi-search"></i> <input class="search-input" ng-model="logSearch" placeholder="search here..." />
+					</div>
+					<table class="table table-striped table-bordered logs" ng-controller="LogsController">
+						<tr>
+							<td>Date</td>
+							<td>Author</td>
+							<td>Description</td>
+						</tr>
+						<tr ng-repeat="log in logs | filter: logSearch">
+							<td>{{log.time}}</td>
+							<td>{{log.code}}</td>
+							<td>{{log.text}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+			
+		<nav class="navbar fixed-bottom menubar">
+			<div class="item selected">
+				<i class="bi bi-person menu-ic"></i> <br>
+				پروفایل
+			</div>
+			<div class="item">
+				<i class="bi bi-book menu-ic"></i> <br>
+				کتابخانه
+			</div>
+			<div class="item">
+				<i class="bi bi-coin menu-ic"></i> <br>
+				پرداخت
+			</div>
+			<div class="item">
+				<i class="bi bi-house menu-ic"></i> <br>
+				خانه
+			</div>
+		</nav>
+
+		<script src="dist/libs/angular.js" charset="utf-8"></script>
+		<script src="dist/js/api.js" type="text/javascript" charset="utf-8"></script>
+		<script src="dist/js/app.js" charset="utf-8"></script>
+		<script>
+			document.body.onload = (e) => {localStorage.account == null ? goto("register.html") : null}
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,36 @@
+.register {
+	margin: auto;
+	position: absolute;
+	width: fit-content;
+	height: fit-content;
+	top: 0;bottom: 0;left: 0;right: 0;
+	
+	padding: 8px;
+	background: #F5F5F5;
+	border-radius: 12px;
+	box-shadow: 0 0 8px #e0e0e0;
+}
+.person {
+	color: white;
+	padding: 8px;
+	width: 55px;
+	height: 55px;
+	border-radius: 60px;
+	text-align: center;
+	font-size: 30px;
+	margin: auto;
+	transform: translateY(-25px);
+	background: linear-gradient(120deg, #0d6efd, #6610f2);
+}
+#codemelli {
+	padding: 8px;
+	outline: none;
+	background: #e0e0e0;
+	border-radius: 50px;
+	border-color: transparent;
+	box-shadow: 0 0 8px #e0e0e0;
+}
+.error {
+	font-size: 11px;
+	color: red;
+}

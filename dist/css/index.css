@@ -1,0 +1,100 @@
+body {
+	background: #efefef;
+	font-family: "vazir";
+}
+
+/* TOOLBAR */
+.navbar {
+	padding: 12px;
+	opacity: 0.95;
+	background: #F5F5F5;
+	box-shadow: 0 0 8px #e0e0e0;
+	border-radius: 0 0 1.5rem 1.5rem;
+}
+.username, .bi-bell, .bi-printer {
+	color: #424242;
+	font-size: 14px;
+	font-family: "vazirl";
+}
+.site-title {
+	margin: auto auto 0 auto;
+	font-family: "nastaligh";
+}
+
+/* MESSAGES */
+.messages {
+	padding: 15px;
+	direction: rtl;
+	margin-bottom: 70px;
+}
+.message {
+	width: 90%;
+	padding: 8px;
+	font-size: 12px;
+	margin-top: 10px;
+	background: #F5F5F5;
+	border-radius: 12px;
+	border: 1px solid #e0e0e0;
+	box-shadow: 0 0 8px #e0e0e0;
+	border-bottom-right-radius: 0;
+	font-family: "vazirl"!important;
+}
+.message-thumb {
+	max-width: 100%;
+	height: auto;
+	margin: auto;
+	display: block;
+}
+.message-text {
+	color: #333;
+}
+.message-info {
+	display: flex;
+	color: #727272;
+	margin-top: 7px;
+}
+.message-time, .message-date, .message-author {
+	margin: auto;
+}
+.msg-action-btn {
+	text-align: center;
+	font-size: 13px;
+	width: 100%;
+}
+
+/* BOTTOM BAR */
+.menubar {	
+	border-radius: 1.5rem 1.5rem 0 0;
+}
+.item {
+	font-size: 12px;
+	text-align: center;
+	margin: auto;
+}
+.menu-ic {
+	font-size: 16px;
+}
+.selected, ::selection {
+	color: #0d6efd;
+	background: #e8eaf6;
+	border-radius: 6px;
+	padding: 8px;
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: "nastaligh";
+	src: url(../assets/fonts/irnastaligh.ttf);
+}
+@font-face {
+	font-family: "vazir";
+	src: url(../assets/fonts/vazir-r.ttf);
+}
+@font-face {
+	font-family: "vazirm";
+	src: url(../assets/fonts/vazir-m.ttf);
+}
+@font-face {
+	font-family: "vazirl";
+	src: url(../assets/fonts/vazir-l.ttf);
+}

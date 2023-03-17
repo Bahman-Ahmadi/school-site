@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fa">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width"/>
+		<link href="dist/libs/bootstrap5.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="dist/libs/bootstrap-icons.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="dist/css/index.css" type="text/css" media="all" />
+		<script src="dist/libs/jquery-3.6.1.min.js" charset="utf-8"></script>
+		
+		<title>دبیرستان فرهنگیان ثارالله دهقان سفیدسنگی</title>
+	</head>
+	<body ng-app="myApp">
+		<nav class="navbar toolbar" ng-controller="StorageController">
+			<button class="btn btn-primary register-btn " ng-show="storage.account == undefined">ورود</button>
+			<button class="btn btn-light print" ng-show="storage.account != undefined"><i class="bi bi-printer"></i></button>
+			<span class="site-title">دبیرستان فرهنگیان ثارالله حاج دهقان سفیدسنگی</span>
+			<span class="username" ng-show="storage.account != undefined">{{account.fname + " " + account.lname}} <i class="bi bi-person"></i></span>
+		</nav>
+		
+		<div class="messages" ng-controller="MessageController">
+			<div class="message" ng-repeat="i in messages">
+				<img class="message-thumb" src="{{i.metadata.thumbnail.src}}" ng-show="{{i.metadata.thumbnail.type == 'Image'}}"/>
+				<source src="{{i.metadata.thumbnail.src}}" type="video/mp4" ng-show="{{i.metadata.thumbnail.type == 'Image'}}">
+				{{i.content}}
+				<div class="message-info">
+					<div class="message-date"><i class="bi bi-calendar"></i> {{i.date}}</div>
+					<div class="message-time"><i class="bi bi-clock"></i> {{i.time}}</div>
+					<div class="message-author"><i class="bi bi-pencil"></i> {{i.author}}</div>
+				</div>
+				<a href="{{i.metadata.action.link}}" ng-show="i.metadata.action != undefined"><button class="btn btn-primary msg-action-btn">{{i.metadata.action.text}}</button></a>
+			</div>
+		</div>
+		
+		<nav class="navbar fixed-bottom menubar">
+			<div class="item">
+				<i class="bi bi-person menu-ic"></i> <br>
+				پروفایل
+			</div>
+			<div class="item">
+				<i class="bi bi-book menu-ic"></i> <br>
+				کتابخانه
+			</div>
+			<div class="item">
+				<i class="bi bi-coin menu-ic"></i> <br>
+				پرداخت
+			</div>
+			<div class="item selected">
+				<i class="bi bi-house menu-ic"></i> <br>
+				خانه
+			</div>
+		</nav>
+		
+		<script src="dist/libs/angular.js" charset="utf-8"></script>
+		<script src="dist/js/api.js" type="text/javascript" charset="utf-8"></script>
+		<script src="dist/js/app.js" charset="utf-8"></script>
+
+	</body>
+</html>

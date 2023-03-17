@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fa">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width"/>
+		<link href="dist/libs/bootstrap5.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="dist/libs/bootstrap-icons.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="dist/css/index.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="dist/css/panels.css" type="text/css" media="all" />
+		<script src="dist/libs/jquery-3.6.1.min.js" charset="utf-8"></script>
+
+		<title>دبیرستان فرهنگیان ثارالله دهقان سفیدسنگی</title>
+	</head>
+	<body ng-app="myApp">
+		<nav class="navbar toolbar" ng-controller="StorageController">
+			<button class="btn btn-light print"><i class="bi bi-printer"></i></button>
+			<span class="site-title">دبیرستان فرهنگیان ثارالله حاج دهقان سفیدسنگی</span>
+			<span class="username">{{account.fname + " " + account.lname}} <i class="bi bi-person"></i></span>
+		</nav>
+
+		<br>
+
+		<div class="container">
+			<div class="row">
+				<div class="session addnotif col-12" ng-controller="NotificationController">
+					<div class="session-name">افزودن اعلان</div>
+					<textarea class="form-control" ng-model="notif_text" rows="8" cols="40" dir="rtl" placeholder="متن اعلان را وارد کنید..."></textarea>
+					<br>
+					<select ng-model="notif_cats">
+						<option value="200">دانش‌آموزان پایه‌ی دهم</option>
+						<option value="201">201</option>
+						<option value="202">202</option>
+						<option value="203">203</option>
+						<option value="300">دانش‌آموزان پایه‌ی یازدهم</option>
+						<option value="301">301</option>
+						<option value="302">302</option>
+						<option value="303">303</option>
+						<option value="304">304</option>
+						<option value="400">دانش‌آموزان پایه‌ی دوازدهم</option>
+						<option value="401">401</option>
+						<option value="402">402</option>
+						<option value="403">403</option>
+						<option value="404">404</option>
+						<option value="500">انتخاب دانش‌آموز</option>
+					</select>
+					<br>
+					<br>
+					<!-- set condition, show table if notif_cats.value == 500 -->
+					<table class="table table-bordered table-striped" ng-show="notif_cats == 500" ng-controller="StudentsController">
+						<tr class="table-header">
+							<td>کلاس</td>
+							<td>نام</td>
+							<td>نام‌خانوادگی</td>
+							<td>عملیات</td>
+						</tr>
+						<tr ng-repeat="student in students">
+							<td>{{student.class}}</td>
+							<td>{{student.fname}}</td>
+							<td>{{student.lname}}</td>
+							<td class="operations">
+								<input type="checkbox" class="form-check-input notif_checkbox selected-student" id="nc_{{student.code}}" />
+								<button class="btn btn-danger" ng-click="deleteStudent('{{student.code}}')"><i class="bi bi-trash"></i></button>
+							</td>
+						</tr>
+					</table>
+					
+					<button class="btn btn-success" ng-click="sendNotif()"><i class="bi bi-plus"></i> ارسال اعلان</button>
+				</div>
+				<div class="session students col-12 row" ng-controller="StudentsController">
+					<div class="session-name">دانش‌آموزان</div>
+					<div class="nc-input"><input type="text" class="form-control" ng-model="nc" placeholder="کدملی دانش‌آموز را وارد کنید"><button class="btn btn-outline-success" ng-click="getStudent(nc)"><i class="bi bi-search"></i></button></div>
+					
+					<div class="result session" ng-show="student != undefined">
+						<div class="session basic row">
+							<div class="field col-12"><div class="field-name">نام و نام‌خانوادگی</div><div class="field-value">{{student.fname + " " + student.lname}}</div></div>
+					<div class="field col-12"><div class="field-name">نام پدر</div><div class="field-value">{{student.father}}</div></div>
+					<div class="field col-4"><div class="field-name">رشته</div><div class="field-value">{{student.classtype}}</div></div>
+					<div class="field col-4"><div class="field-name">پایه</div><div class="field-value">{{student.classnum}}</div></div>
+					<div class="field col-4"><div class="field-name">کلاس</div><div class="field-value">{{student.class}}</div></div>
+					<div class="field col-12"><div class="field-name">کدملی</div><div class="field-value">{{student.code}}</div></div>
+
+							<button class="btn btn-danger col-5"><i class="bi bi-trash"></i> حذف کاربر</button>
+							<button class="btn btn-warning col-5"><i class="bi bi-pencil"></i> اعمال تغییرات</button>
+						</div>
+						<hr>
+						<div class="session library">
+							<table class="table table-bordered table-striped">
+								<tr>
+									<td>ردیف</td>
+									<td>تصویر</td>
+									<td>نام</td>
+									<td>انتشارات</td>
+									<td>تاریخ</td>
+									<td>عملیات</td>
+								</tr>
+								<tr ng-repeat="result in student.books">
+									<td>{{student.books.indexOf(result)+1}}</td>
+									<td><img src="{{result.photo}}" alt="BOOK" class="book-photo"></td>
+									<td>{{result[0].name}}</td>
+									<td>{{result[0].publication}}</td>
+									<td>{{result[1]}}</td>
+									<td><button class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
+								</tr>
+							</table>
+							<button class="btn btn-success"><i class="bi bi-plus"></i> افزودن کتاب</button>
+						</div>
+						<hr>
+						<div class="session credit">
+							<table class="table table-bordered table-striped">
+								<tr>
+									<td>درس</td>
+									<td>مستمر نوبت‌اول</td>
+									<td>نوبت‌اول</td>
+									<td>مستمر نوبت دوم</td>
+									<td>نوبت دوم</td>
+								</tr>
+								<tr>
+									<td>ریاضی</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>فیزیک</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>هندسه</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>شیمی</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>عربی</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>دینی</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>فارسی</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>زبان</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>آزمایشگاه</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>ورزش</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>تفکر</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>جغرافیا</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>نگارش</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+									<td>20</td>
+								</tr>
+							</table>
+							<button class="btn btn-warning"><i class="bi bi-pencil"></i> اعمال تغییرات</button>
+						</div>
+					</div>
+				</div>
+				<div class="session teachers col-12">
+					<div class="session-name">دبیران</div>
+					<table class="table table-bordered table-striped">
+						<tr>
+							<td>ردیف</td>
+							<td>نام و نام‌خانوادگی</td>
+							<td>کدملی</td>
+							<td>کلاس‌ها</td>
+							<td>عملیات</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>بهمن احمدی</td>
+							<td>0928422496</td>
+							<td>202 , 203 , 302 , 404</td>
+							<td><button class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>بهمن احمدی</td>
+							<td>0928422496</td>
+							<td>202 , 203 , 302 , 404</td>
+							<td><button class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
+						</tr>
+					</table>
+					<button class="btn btn-success"><i class="bi bi-plus"></i> افزودن دبیر</button>
+				</div>
+				<div class="session programs col-12">
+					<div class="session-name">برنامهٔ کلاسی</div>
+					<br>
+					<select id="program_cats">
+						<option value="201">201</option>
+						<option value="202">202</option>
+						<option value="203">203</option>
+						<option value="301">301</option>
+						<option value="302">302</option>
+						<option value="303">303</option>
+						<option value="304">304</option>
+						<option value="401">401</option>
+						<option value="402">402</option>
+						<option value="403">403</option>
+						<option value="404">404</option>
+					</select>
+					<br>
+					<br>
+					<table class="table table-bordered table-striped">
+						<tr>
+							<td>روز</td>
+							<td>زنگ اول</td>
+							<td>زنگ دوم</td>
+							<td>زنگ سوم</td>
+							<td>زنگ چهارم</td>
+						</tr>
+						<tr>
+							<td>شنبه</td>
+							<td>فوق هندسه</td>
+							<td>ریاضی</td>
+							<td>شیمی</td>
+							<td>شیمی</td>
+						</tr>
+						<tr>
+							<td>یکشنبه</td>
+							<td>نگارش</td>
+							<td>عربی</td>
+							<td>زبان</td>
+							<td>زبان</td>
+						</tr>
+						<tr>
+							<td>دوشنبه</td>
+							<td>تفکر</td>
+							<td>دفاعی</td>
+							<td>جغرافیا</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>سه‌شنبه</td>
+							<td>فارسی</td>
+							<td>ورزش</td>
+							<td>آزمایشگاه</td>
+							<td>هندسه</td>
+						</tr>
+						<tr>
+							<td>چهارشنبه</td>
+							<td>فیزیک</td>
+							<td>ریاضی</td>
+							<td>دینی</td>
+							<td>فیزیک</td>
+						</tr>
+						<tr>
+							<td>پنج‌شنبه</td>
+							<td>فوق فیزیک</td>
+							<td>فوق شیمی</td>
+							<td>فوق ریاضی</td>
+							<td></td>
+						</tr>
+					</table>
+					<button class="btn btn-warning"><i class="bi bi-pencil"></i> اعمال تغییرات</button>
+				</div>
+				<div class="session factors col-12">
+					<div class="session-name">پرداخت ها</div>
+					<br>
+					<table class="table table-bordered table-striped">
+						<tr>
+							<td>ردیف</td>
+							<td>پرداخت‌کننده</td>
+							<td>مبلغ</td>
+							<td>بابت</td>
+							<td>تاریخ</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>بهمن احمدی</td>
+							<td>250,000 تومان</td>
+							<td>سالن مطالعه</td>
+							<td>1401/8/3</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>بهمن احمدی</td>
+							<td>250,000 تومان</td>
+							<td>سالن مطالعه</td>
+							<td>1401/8/3</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>بهمن احمدی</td>
+							<td>250,000 تومان</td>
+							<td>سالن مطالعه</td>
+							<td>1401/8/3</td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>بهمن احمدی</td>
+							<td>250,000 تومان</td>
+							<td>سالن مطالعه</td>
+							<td>1401/8/3</td>
+						</tr>
+						<tr>
+							<td>5</td>
+							<td>بهمن احمدی</td>
+							<td>250,000 تومان</td>
+							<td>سالن مطالعه</td>
+							<td>1401/8/3</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+			
+		<nav class="navbar fixed-bottom menubar">
+			<div class="item selected">
+				<i class="bi bi-person menu-ic"></i> <br>
+				پروفایل
+			</div>
+			<div class="item">
+				<i class="bi bi-book menu-ic"></i> <br>
+				کتابخانه
+			</div>
+			<div class="item">
+				<i class="bi bi-coin menu-ic"></i> <br>
+				پرداخت
+			</div>
+			<div class="item">
+				<i class="bi bi-house menu-ic"></i> <br>
+				خانه
+			</div>
+		</nav>
+		
+		<script src="dist/libs/angular.js" charset="utf-8"></script>
+		<script src="dist/js/api.js" type="text/javascript" charset="utf-8"></script>
+		<script src="dist/js/app.js" charset="utf-8"></script>
+		<script>
+			document.body.onload = (e) => {localStorage.account == null ? goto("register.html") : null}
+		</script>
+	</body>
+</html>
